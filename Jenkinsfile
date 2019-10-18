@@ -1,9 +1,9 @@
 pipeline{
     agent any
     stages{
-        stage('command'){
+        stage(SCM){
             steps{
-               echo 'Helloooo'
+               echo 'Helloooo girls'
             }
         }
     }
