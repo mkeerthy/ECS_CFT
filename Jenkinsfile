@@ -7,7 +7,10 @@ pipeline {
 			Stack_name = "ECSHelloWorld"	 
 	 }
   parameters {
-	  string(name: DesiredCapacity, defaultValue: "1", description: 'Number of desired EC2 instances') string(name: EnvironmentName, defaultValue: "ECS HelloWorld", description: 'ECS ClusterName') string(name: InstanceType, defaultValue: "t2.micro", description: 'Instance Type') string(name: KeyName, defaultValue: "mad")
+	  string(name: 'DesiredCapacity', defaultValue: "1", description: 'Number of desired EC2 instances') 
+	  string(name: 'EnvironmentName', defaultValue: "ECS HelloWorld", description: 'ECS ClusterName') 
+	  string(name: 'InstanceType', defaultValue: "t2.micro", description: 'Instance Type') 
+	  string(name: 'KeyName', defaultValue: "mad")
   } 
   stages {
       stage('Test') {
