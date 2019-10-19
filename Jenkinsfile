@@ -4,7 +4,7 @@ pipeline {
 	 		AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
 			AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
 	  		AWS_REGION = "us-east-1"
-			Stack_name = "ECSHelloWorld"	 
+#			STACK_NAME = "ECSHelloWorld"	 
 	 }
   parameters {
 	  string(name: 'DesiredCapacity', defaultValue: "1", description: 'Number of desired EC2 instances') 
@@ -12,17 +12,11 @@ pipeline {
 	  string(name: 'InstanceType', defaultValue: "t2.micro", description: 'Instance Type') 
 	  string(name: 'KeyName', defaultValue: "mad")
   } 
-  stages {
-      stage('Test') {
-            steps {
-                sh 'echo "Fail!"; exit 1'
-            }
-      }
-   stage('Build') {
+  stage('Build') {
         steps {
             sh 'echo "Build step started"'
-	    sh "echo ${params.region}"	
-		script{ datas = readYaml (file: 'create_ecs.yml') ${DesiredCapacity}. ${EnvironmentName}. ${InstanceType}. ${KeyName} }
+	    aws cloudformation create-stack --stack-name ECSHelloWorld --template-url https://mad-ecstest.s3.amazonaws.com/ecs-updated.yml --parameters ParameterKey=DesiredCapacity,ParameterValue=1,ParameterKey=EnvironmentName,ParameterValue=ECS HelloWorld,ParameterKey=InstanceType,ParameterValue=t2.micro,ParameterKey=KeyName,ParameterValue=mad	
+#	    script{ datas = readYaml (file: 'create_ecs.yml') ${DesiredCapacity}. ${EnvironmentName}. ${InstanceType}. ${KeyName} }
 	    sleep 30
             sh 'echo "Build step completed"'            
         }
