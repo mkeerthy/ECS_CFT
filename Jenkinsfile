@@ -10,7 +10,6 @@ pipeline {
         string(Name: InstanceType, defaultValue: 't2.micro', description: 'Instance Type')
         string(Name: KeyName, defaultValue: 'mad')
   }
-  Cloud Formation parameters: VpcCidr=Init_VpcCidr;PrefixName=Init_PrefixName;
   stages {
       stage('Test') {
             steps {
