@@ -14,7 +14,7 @@ pipeline {
   stage('Build') {
         steps {
             sh 'echo "Build step started"'
-	    aws cloudformation create-stack --stack-name ECSHelloWorld --template-url https://mad-ecstest.s3.amazonaws.com/ecs-updated.yml --parameters ParameterKey=DesiredCapacity,ParameterValue=1,ParameterKey=EnvironmentName,ParameterValue=ECS HelloWorld,ParameterKey=InstanceType,ParameterValue=t2.micro,ParameterKey=KeyName,ParameterValue=mad	
+	    aws cloudformation create-stack --stack-name ECSHelloWorld --template-url https://mad-ecstest.s3.amazonaws.com/ecs-updated.yml --parameters ${DesiredCapacity}. ${EnvironmentName}. ${InstanceType}. ${KeyName}	
 	    sleep 30
             sh 'echo "Build step completed"'            
         }
