@@ -7,11 +7,8 @@ pipeline {
 			Stack_name = "ECSHelloWorld"	 
 	 }
   parameters {
-        string(name: DesiredCapacity, defaultValue: "1", description: 'Number of desired EC2 instances')
-        string(name: EnvironmentName, defaultValue: "ECS HelloWorld", description: 'ECS ClusterName')
-        string(name: InstanceType, defaultValue: "t2.micro", description: 'Instance Type')
-        string(name: KeyName, defaultValue: "mad")
-  }
+	  {string(name: DesiredCapacity, defaultValue: "1", description: 'Number of desired EC2 instances') string(name: EnvironmentName, defaultValue: "ECS HelloWorld", description: 'ECS ClusterName') string(name: InstanceType, defaultValue: "t2.micro", description: 'Instance Type') string(name: KeyName, defaultValue: "mad")}
+  } 
   stages {
       stage('Test') {
             steps {
@@ -21,7 +18,8 @@ pipeline {
    stage('Build') {
         steps {
             sh 'echo "Build step started"'
-            script{ datas = readYaml (file: 'create_ecs.yml') }
+	    sh "echo ${params.region}"	
+		script{ datas = readYaml (file: 'create_ecs.yml') ${DesiredCapacity}. ${EnvironmentName}. ${InstanceType}. ${KeyName} }
 	    sleep 30
             sh 'echo "Build step completed"'            
         }
