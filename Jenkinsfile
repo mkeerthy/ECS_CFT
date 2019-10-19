@@ -3,6 +3,8 @@ pipeline {
   environment {
 	 		AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
 			AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+	  		AWS_REGION = "us-east-1"
+			Stack_name = "ECSHelloWorld"	 
 	 }
   parameters {
         string(Name: DesiredCapacity, defaultValue: '1', description: 'Number of desired EC2 instances')
@@ -20,6 +22,7 @@ pipeline {
         steps {
             sh 'echo "Build step started"'
             script{ datas = readYaml (file: 'create_ecs.yml') }
+	    sleep 30
             sh 'echo "Build step completed"'            
         }
       }
