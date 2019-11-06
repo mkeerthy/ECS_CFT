@@ -13,7 +13,7 @@ pipeline {
  // } 
   stage('Build') {
         steps {
-		withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+		withAWS(credentials: 'AWS_JenkinsAccess', region: 'us-east-1') {
 		    sh 'echo "Build step started"'
 	    //aws cloudformation create-stack --stack-name ECSHelloWorld --template-url https://mad-ecstest.s3.amazonaws.com/ecs-updated.yml --parameters ${DesiredCapacity}. ${EnvironmentName}. ${InstanceType}. ${KeyName}	
 	            def outputs = cfnUpdate(stack:'my-stack', file:'ecs-updated.yml', params:['DesiredCapacity'='1','EnvironmentName': 'ECS HelloWorld','InstanceType'= 't2.micro','KeyName'='mad'], keepParams:['Version'], timeoutInMinutes:10, tags:['TagName=Value'], notificationARNs:['arn:aws:sns:us-east-1:317246864222:GitrRepo_update:topic'], pollInterval:1000, onFailure:'DELETE')
