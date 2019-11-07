@@ -14,7 +14,7 @@ pipeline {
   stages {
       stage('Build') {
           steps {
-	      withAWS(credentials: 'AWS_JenkinsAccess', region: 'us-east-1') {
+	      withAWS(credentials: 'aws_credentials', region: 'us-east-1') {
 		    sh 'echo "Build step started"'
 	    //aws cloudformation create-stack --stack-name ECSHelloWorld --template-url https://mad-ecstest.s3.amazonaws.com/ecs-updated.yml --parameters ${DesiredCapacity}. ${EnvironmentName}. ${InstanceType}. ${KeyName}	
 	            cfnUpdate(stack:'my-stack', file:'create_ecs.yml', onFailure:'DELETE')  
